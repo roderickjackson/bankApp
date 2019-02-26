@@ -6,7 +6,8 @@ const usersRouter = require('../controllers/userscontroller')
 
 /* GET users listing. */
 router.get('/', usersRouter.index)
-router.post('/', usersRouter.create)
+router.post('/user/register', usersRouter.register)
+router.post('/user/login', usersRouter.login)
 // Router.get('/flights/new', usersController.new)
 // Router.get('/:id', usersController.show)
 // Router.post('/flights/new', usersController.create);
