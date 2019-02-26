@@ -1,27 +1,28 @@
+// Dependencies
 var createError = require('http-errors');
-var express = require('express');
 var path = require('path');
-//var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport')
-require('./config/database');
-// require('../auth-authy/models/user');
 
+// Express App
+var express = require('express');
+var app = express();
+
+ // Controllers Example
+ //import apiController from './controllers/api';
+
+// Database
+require('./config/database');
+
+// Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./controllers/api/users');
 
-var app = express();
-
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'ejs');
-
+// Middlewares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // Passport config
 require('./config/passport')(passport)
@@ -29,9 +30,8 @@ require('./config/passport')(passport)
 // Passport Middleware
 app.use(passport.initialize())
 
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+ // Routes Example
+// app.use('/api', apiController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

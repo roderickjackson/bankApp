@@ -9,9 +9,6 @@ const validateLoginInput = require('../validation/login')
 // User Model
 const User =  require('../models/user');
 
-
-
-
 module.exports = { index, register, login}
 
 /*

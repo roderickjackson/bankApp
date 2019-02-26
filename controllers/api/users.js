@@ -1,8 +1,14 @@
-const express = require("express")
-const router = express.Router()
+
+// Dependencies
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const keys = require("../../config/keys")
+
+// Express Application 
+const express = require("express")
+
+// Express Router
+const router = express.Router()
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register")
