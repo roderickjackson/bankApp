@@ -112,7 +112,7 @@ class Register extends Component{
                                     letterSpacing: '1.5',
                                     marginTop: '1rem'
                                 }}
-                                    type='Submit' 
+                                    type='submit' 
                                     className='btn btn-large waves-effect 
                                     waves-light hoverable blue accent-3'
                                 > 
