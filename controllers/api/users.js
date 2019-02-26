@@ -2,14 +2,14 @@ const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const keys = require("../config/keys")
+const keys = require("../../config/keys")
 
 // Load input validation
-const validateRegisterInput = require("../validation/register")
-const validateLoginInput = require("../validation/login")
+const validateRegisterInput = require("../../validation/register")
+const validateLoginInput = require("../../validation/login")
 
 // Load User model
-const User = require("../models/user")
+const User = require("../../models/user")
 
 // @route POST /users/register
 // @desc Register user
@@ -59,7 +59,7 @@ const { errors, isValid } = validateLoginInput(req.body)
     return res.status(400).json(errors)
   }
 const email = req.body.email
-  const password = req.body.password
+const password = req.body.password
 
 // Find user by email
   User.findOne({ email }).then(user => {
@@ -79,8 +79,13 @@ const email = req.body.email
           id: user.id,
           name: user.name
         }
-        
+
 // Sign token
+/*
+ * jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256' }, function(err, token) {
+ * console.log(token);
+ * });
+ */
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -88,12 +93,7 @@ const email = req.body.email
             expiresIn: 31556926 // 1 year in seconds
           },
           (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            })
-          }
-        )
+            res.json({success: true, token: "Bearer " + token})})
       } else {
         return res
           .status(400)

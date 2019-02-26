@@ -8,7 +8,7 @@ require('./config/database');
 // require('../auth-authy/models/user');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./controllers/api/users');
 
 var app = express();
 
