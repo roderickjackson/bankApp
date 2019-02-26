@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
-class Register extends Component{
+class Login extends Component{
     /* I need to create a constructor function and call super in order
      * to get access to the "this" method.
      * This method isn't limited to react
@@ -11,10 +11,8 @@ class Register extends Component{
         // This the start of state machine
         // intial state is an empty string and an empty "errors" object
         this.state = {
-            name: '',
             email: '',
             password: '',
-            password2: '',
             errors: {} 
         }
     }
@@ -34,13 +32,11 @@ class Register extends Component{
     onSubmit = e => {
         e.preventDefault()
 
-        const newUser = {
-            name: this.state.name,
+        const userData = {
             email: this.state.email,
             password: this.state.password,
-            password2: this.state.password2
         }
-    console.log(newUser) // console.log will be erased when I ship this to production as an actual product
+    console.log(userData) // console.log will be erased when I ship this to production as an actual product
     } 
 
     // RENDERING Below HOMIE WHAT WE CODED ABOVE ^
@@ -58,23 +54,13 @@ class Register extends Component{
                             Back to Home                       
                         </Link>
                         <div className='col s12' style={{paddingLeft: '11px'}}>
-                            <h4><b>Register</b>below</h4>
+                            <h4><b>Login</b>below</h4>
                             <p className='gret-text text-darken-1'>
-                                Already have an account?
-                                <Link to='/login'>Login</Link>
+                                Don't have an account?
+                                <Link to='/register'>Register</Link>
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className='input-field col s12'>
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.name}
-                                    error={errors.name}
-                                    id='text'
-                                    type='text'
-                                />
-                                <label htmlFor='name'>Name</label>
-                            </div>
                             <div className='input-field col s12'>
                                 <input
                                     onChange={this.onChange}
@@ -95,16 +81,6 @@ class Register extends Component{
                                 />
                                 <label htmlFor='password'>Password</label>
                             </div>
-                            <div className='input-field col s12'>
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password2}
-                                    error={errors.password2}
-                                    id='password2'
-                                    type='password'
-                                />
-                                <label htmlFor='password2'>Confirm Password</label>
-                            </div>
                             <div className='col s12' style={{padding: '11'}}>
                                 <button style={{
                                     width: '150',
@@ -116,7 +92,7 @@ class Register extends Component{
                                     className='btn btn-large waves-effect 
                                     waves-light hoverable blue accent-3'
                                 > 
-                                    Sign Up
+                                    Login
                                 </button>
                             </div>
                         </form>
@@ -127,4 +103,4 @@ class Register extends Component{
     }
 }
 
-export default Register
+export default Login
