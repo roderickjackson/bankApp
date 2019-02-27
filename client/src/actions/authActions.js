@@ -70,7 +70,7 @@ export const setUserLoading = () => {
 
 // Log user out
 export const logoutUser = () => {
-    // Remove token from local storage
+    // Remove token from sessionStorage
     sessionStorage.removeItem('jwtToken')
     
     // Remove auth header for future requests

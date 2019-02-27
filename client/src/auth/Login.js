@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {loginUser} from '../actions/authActions'
+import classnames from 'classnames'
 
 class Login extends Component{
     /* I need to create a constructor function and call super in order
@@ -14,6 +18,19 @@ class Login extends Component{
             email: '',
             password: '',
             errors: {} 
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.auth.isAuthenticated){
+            // push user to dashboard when they login
+            this.props.history.push('/dashboadr')
+        }
+
+        if(nextProps.errors){
+            this.setState({
+                errors: nextProps.errors
+            })
         }
     }
 
@@ -36,7 +53,7 @@ class Login extends Component{
             email: this.state.email,
             password: this.state.password,
         }
-    console.log(userData) // console.log will be erased when I ship this to production as an actual product
+    this.props.loginUser(userData)
     } 
 
     // RENDERING Below HOMIE WHAT WE CODED ABOVE ^
@@ -68,8 +85,15 @@ class Login extends Component{
                                     error={errors.email}
                                     id='email'
                                     type='email'
+                                    className={classnames('', {
+                                        invalid: errors.email || errors.emailnotfound
+                                    })}
                                 />
                                 <label htmlFor='email'>Email</label>
+                                <span className='red-text'>
+                                    {error.email}
+                                    {error.emailnotfound}
+                                </span>
                             </div>
                             <div className='input-field col s12'>
                                 <input
@@ -78,8 +102,15 @@ class Login extends Component{
                                     error={errors.password}
                                     id='password'
                                     type='password'
+                                    className={classnames('', {
+                                        invalid: errors.password || errors.passwordincorrect
+                                    })}
                                 />
                                 <label htmlFor='password'>Password</label>
+                                <span className='red-text'>
+                                    {errors.password}
+                                    {errors.passwordincorrect}
+                                </span>
                             </div>
                             <div className='col s12' style={{padding: '11'}}>
                                 <button style={{
@@ -103,4 +134,18 @@ class Login extends Component{
     }
 }
 
-export default Login
+Login.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+})
+
+export default connect(
+    mapStateToProps,
+    {loginUser}    
+)(Login)
