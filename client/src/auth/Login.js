@@ -21,10 +21,18 @@ class Login extends Component{
         }
     }
 
+    componentDidMount(){
+        // If logged in and user navigates to 
+        // Login page, should redirect them to dashboard
+        if(this.props.auth.isAuthenticated){
+            this.props.history.push('/dashboard')
+        }
+    }
+
     componentWillReceiveProps(nextProps){
         if(nextProps.auth.isAuthenticated){
             // push user to dashboard when they login
-            this.props.history.push('/dashboadr')
+            this.props.history.push('/dashboard')
         }
 
         if(nextProps.errors){
@@ -39,7 +47,7 @@ class Login extends Component{
     // that the user enters
     onChange = e => {
         // This will target Key/Value as in target "name: Roderick Jacksons Brason Son"
-        this.setState({[e.taget.id]: e.taget.value})
+        this.setState({[e.target.id]: e.target.value}) // Man! huge source of headache right here!!
     }
     
     // Submit event will accept the data the user enters
@@ -91,8 +99,8 @@ class Login extends Component{
                                 />
                                 <label htmlFor='email'>Email</label>
                                 <span className='red-text'>
-                                    {error.email}
-                                    {error.emailnotfound}
+                                    {errors.email}
+                                    {errors.emailnotfound}
                                 </span>
                             </div>
                             <div className='input-field col s12'>

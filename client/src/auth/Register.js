@@ -23,6 +23,8 @@ class Register extends Component{
         }
     }
 
+z
+
     componentWillReceiveProps(nextProps){
         if(nextProps.errors){
             this.setState({
@@ -36,7 +38,7 @@ class Register extends Component{
     // that the user enters
     onChange = e => {
         // This will target Key/Value as in target "name: Roderick Jacksons Brason Son"
-        this.setState({[e.taget.id]: e.taget.value})
+        this.setState({[e.target.id]: e.target.value})
     }
     
     // Submit event will accept the data the user enters
@@ -126,7 +128,7 @@ class Register extends Component{
                                     error={errors.password2}
                                     id='password2'
                                     type='password'
-                                    className={classnames=('', {
+                                    className={classnames('', {
                                         invalid: errors.password2
                                     })}
                                 />

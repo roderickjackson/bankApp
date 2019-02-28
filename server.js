@@ -4,11 +4,18 @@ var express = require('express');
 var app = express();
 
 // Dependencies
-var path = require('path');
 var passport = require('passport')
+var mongoose = require('mongoose')
 
-// Database
-require('./config/database');
+// DB config
+var db = require('./config/keys').mongoURI
+
+
+// Connect to MonogDB
+mongoose
+  .connect(db, {useNewUrlParser: true})
+  .then(() => console.log(`Connected to MongoDB`))
+  .catch((err) => console.log(err))
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

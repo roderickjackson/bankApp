@@ -1,27 +1,39 @@
-const express = require("express")
-const router = express.Router()
+
+// Dependencies
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const keys = require("../config/keys")
+const keys = require("../../config/keys")
+
+// Express Application 
+const express = require("express")
+
+// Express Router
+const router = express.Router()
 
 // Load input validation
-const validateRegisterInput = require("../validation/register")
-const validateLoginInput = require("../validation/login")
+const validateRegisterInput = require("../../validation/register")
+const validateLoginInput = require("../../validation/login")
 
 // Load User model
-const User = require("../models/User")
+const User = require("../../models/User")
 
-
-// @route  POST /users/register
-// @desc   Register user
+// @route GET api/users/test
+// @desc  Tests users route
 // @access Public
+router.get('/test', (req, res) => res.send(`<h1>This is a test route</h1>`))
+
+// @route POST /users/register
+// @desc Register user
 router.post("/register", (req, res) => {
+
 // Form validation
 const { errors, isValid } = validateRegisterInput(req.body)
+
 // Check validation
   if (!isValid) {
     return res.status(400).json(errors)
   }
+
 User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" })
@@ -58,7 +70,7 @@ const { errors, isValid } = validateLoginInput(req.body)
     return res.status(400).json(errors)
   }
 const email = req.body.email
-  const password = req.body.password
+const password = req.body.password
 
 // Find user by email
   User.findOne({ email }).then(user => {
@@ -78,8 +90,13 @@ const email = req.body.email
           id: user.id,
           name: user.name
         }
-        
+
 // Sign token
+/*
+ * jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256' }, function(err, token) {
+ * console.log(token);
+ * });
+ */
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -87,12 +104,7 @@ const email = req.body.email
             expiresIn: 31556926 // 1 year in seconds
           },
           (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            })
-          }
-        )
+            res.json({success: true, token: "Bearer " + token})})
       } else {
         return res
           .status(400)

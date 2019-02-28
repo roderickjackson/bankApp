@@ -9,7 +9,7 @@ import {
 } from './types'
 
 // Register User
-export const registerUser = (userData, history) => {
+export const registerUser = (userData, history) => dispatch => {
     axios
         // I will change this to /api/users/register when I get a chance
         .post('/users/register', userData)
@@ -23,7 +23,7 @@ export const registerUser = (userData, history) => {
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
-    axios  
+    axios
          // I will change this to /api/users/login when I get a chance
         .post('/users/login', userData)
         .then(res => {
@@ -69,7 +69,7 @@ export const setUserLoading = () => {
 }
 
 // Log user out
-export const logoutUser = () => {
+export const logoutUser = () => dispatch => {
     // Remove token from sessionStorage
     sessionStorage.removeItem('jwtToken')
     
