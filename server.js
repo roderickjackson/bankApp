@@ -1,28 +1,27 @@
-// Dependencies
-var createError = require('http-errors');
-var path = require('path');
-var logger = require('morgan');
-var passport = require('passport')
-
-// Express App
+// Express Application
 var express = require('express');
 var app = express();
 
- // Controllers Example
- //import apiController from './controllers/api';
+// Dependencies
+var passport = require('passport')
+var mongoose = require('mongoose')
 
-// Database
-require('./config/database');
+// DB config
+var db = require('./config/keys').mongoURI
 
-// Routes
+
+// Connect to MonogDB
+mongoose
+  .connect(db, {useNewUrlParser: true})
+  .then(() => console.log(`Connected to MongoDB`))
+  .catch((err) => console.log(err))
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./controllers/api/users');
+var usersRouter = require('./routes/users');
 
-// Middlewares
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+>>>>>>> new-starting-point
 
 // Passport config
 require('./config/passport')(passport)
@@ -38,7 +37,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler ----> May remove also!
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;

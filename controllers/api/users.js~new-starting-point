@@ -15,23 +15,25 @@ const validateRegisterInput = require("../../validation/register")
 const validateLoginInput = require("../../validation/login")
 
 // Load User model
-<<<<<<< HEAD:controllers/api/users.js
-const User = require("../../models/user")
-=======
-const User = require("../models/User")
->>>>>>> new-starting-point:routes/users.js
+const User = require("../../models/User")
 
-
-// @route  POST /users/register
-// @desc   Register user
+// @route GET api/users/test
+// @desc  Tests users route
 // @access Public
+router.get('/test', (req, res) => res.send(`<h1>This is a test route</h1>`))
+
+// @route POST /users/register
+// @desc Register user
 router.post("/register", (req, res) => {
+
 // Form validation
 const { errors, isValid } = validateRegisterInput(req.body)
+
 // Check validation
   if (!isValid) {
     return res.status(400).json(errors)
   }
+
 User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" })

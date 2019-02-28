@@ -7,13 +7,18 @@ const validateRegisterInput = require('../validation/register')
 const validateLoginInput = require('../validation/login')
 
 // User Model
-const User =  require('../models/user');
+const User =  require('../models/User');
 
+<<<<<<< HEAD
 module.exports = { index, register, login}
+=======
+module.exports = { register, login}
+>>>>>>> new-starting-point
 
 /*
- * @route POST users/register
- * @desc Register user
+ * @route   POST users/register
+ * @desc    Register user
+ * @access  Public
  */
 function register(req, res){
  // Form validation
@@ -51,8 +56,9 @@ function register(req, res){
 }
 
 /*
- * @route Post users/login
- * @desc Login user and return JWT token
+ * @route   Post users/login
+ * @desc    Login user and return JWT token
+ * @access  Public
  */
 
 function login(req, res){
@@ -110,6 +116,6 @@ function login(req, res){
 
 
 
-function index(req, res){
-    User.find({}, (err, users) => {res.render('users/index', {users})})
-}
+// function index(req, res){
+//     User.find({}, (err, users) => {res.render('users/index', {users})})
+// }
