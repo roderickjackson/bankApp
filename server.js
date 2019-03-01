@@ -6,8 +6,8 @@ var app = express();
 var passport = require('passport')
 var mongoose = require('mongoose')
 
-// DB config
-var db = require('./config/keys').mongoURI
+// DB Config
+const db = require("./config/keys").mongoURI;
 
 
 // Connect to MonogDB
@@ -16,6 +16,10 @@ mongoose
   .then(() => console.log(`Connected to MongoDB`))
   .catch((err) => console.log(err))
 
+<<<<<<< HEAD
+=======
+var usersRouter = require('./routes/api/users');
+>>>>>>> new-starting-point
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,8 +31,12 @@ require('./config/passport')(passport)
 // Passport Middleware
 app.use(passport.initialize())
 
+<<<<<<< HEAD
  // Routes Example
 // app.use('/api', apiController);
+=======
+app.use('/users', usersRouter);
+>>>>>>> new-starting-point
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

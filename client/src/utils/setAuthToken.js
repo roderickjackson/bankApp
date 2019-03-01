@@ -8,7 +8,7 @@ const setAuthToken = token => {
         // XMLHttpRequest header on every request
         // We want this token so the user can refresh the browser
         // And still be logged in on both browser and mobile devices
-        axios.defaults.headers.common = token
+        axios.defaults.headers.common['Authorization'] = token
     }
     else{
         // Delete auth header
