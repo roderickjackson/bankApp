@@ -9,11 +9,7 @@ const validateLoginInput = require('../validation/login')
 // User Model
 const User =  require('../models/User');
 
-<<<<<<< HEAD
-module.exports = { index, register, login}
-=======
 module.exports = { register, login}
->>>>>>> new-starting-point
 
 /*
  * @route   POST users/register

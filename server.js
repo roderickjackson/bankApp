@@ -16,12 +16,10 @@ mongoose
   .then(() => console.log(`Connected to MongoDB`))
   .catch((err) => console.log(err))
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
->>>>>>> new-starting-point
+
 
 // Passport config
 require('./config/passport')(passport)

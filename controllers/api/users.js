@@ -15,11 +15,9 @@ const validateRegisterInput = require("../../validation/register")
 const validateLoginInput = require("../../validation/login")
 
 // Load User model
-<<<<<<< HEAD:controllers/api/users.js
-const User = require("../../models/user")
-=======
+
 const User = require("../models/User")
->>>>>>> new-starting-point:routes/users.js
+
 
 
 // @route  POST /users/register
